@@ -1,14 +1,14 @@
-# Short report: predicting `duration_minutes` from the attached truck-stop CSV
+# Short report: predicting `duration_minutes` from existing truck-stop data
 
 ## What was modeled
 
-The attached CSV contains **2,910 truck-stop records** and **17 raw columns**.  
-For the vegetation-cutting use case, I treated `duration_minutes` as the regression target and filtered the data to the two **productive stop types**:
+The truckstop CSV contains **2,910 truck-stop records** and **17 raw columns**.  
+For the vegetation-cutting use case, `duration_minutes` was treated as the regression target and filtered the data to the two **productive stop types**:
 
 - `work`
 - `recurring_site`
 
-This leaves **2,472 stops** for modeling. I excluded `traffic` and `lunch` because those stops do not represent vegetation-cutting productivity.
+This leaves **2,472 stops** for modeling. `traffic` and `lunch` were excluded because those stops do not represent vegetation-cutting productivity.
 
 ## Important limitation
 
@@ -26,7 +26,7 @@ So the code below is **not yet the final vegetation-cutting planning model**. It
 
 ## Algorithm choice
 
-I chose **CatBoostRegressor** as the main model.
+**CatBoostRegressor** is chosen as the main model.
 
 Why:
 
@@ -106,7 +106,7 @@ This is more realistic than a random split because it evaluates how well the mod
 
 The target is trained on `log1p(duration_minutes)` to stabilize the long right tail, then transformed back to minutes for reporting.
 
-## Results on the attached CSV
+## Results on the given truckstop CSV
 
 ### 1. Operational model (recommended with the current CSV)
 This model excludes direct count leakage but still uses within-stop ratios.
@@ -152,7 +152,7 @@ Use the **strict model** only as a reality check for future planning. Its weak p
 
 With the current truck-stop CSV, CatBoost can predict stop duration **reasonably well** only when it uses features that describe the realized stop behavior. For true forward planning of vegetation-cutting time, the model needs the operational and environmental features from the earlier project brief—especially measured encroachment.
 
-## Files created
+## Files used/created:
 
 - `train_duration_minutes_catboost.py` — training script
 - `duration_model_outputs/metrics_operational.json`
