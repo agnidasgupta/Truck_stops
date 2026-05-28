@@ -22,7 +22,7 @@ This CSV **does not yet contain** the main causal drivers described in the earli
 - tree species
 - time since scan
 
-So the code below is **not yet the final vegetation-cutting planning model**. It is a strong **stop-duration prediction model from the currently available telemetry and metadata**.
+Hence, the code below is **not yet the final vegetation-cutting planning model**. It is a strong **stop-duration prediction model from the currently available telemetry and metadata**.
 
 ## Algorithm choice
 
