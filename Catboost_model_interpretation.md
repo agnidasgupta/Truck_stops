@@ -29,34 +29,42 @@ After filtering to productive stop reasons (`work` and `recurring_site`), the tr
 
 ```json
 {
-  "source_type": "input_path",
-  "row_count_after_filtering": 2472,
+  "source_type": "api_url",
+  "row_count_after_filtering": 2311,
+  "location_features_removed": [
+    "lat",
+    "lon",
+    "geo_cell_3dp",
+    "prev_stop_distance_miles",
+    "prior_visits_same_geo_cell",
+    "prior_visits_same_geo_cell_vehicle"
+  ],
   "validation": {
-    "mae": 4.718782012415744,
-    "rmse": 8.405820721806018,
-    "r2": 0.8646753841908309
+    "mae": 5.0035725544152365,
+    "rmse": 9.212621244965,
+    "r2": 0.8433474711386345
   },
   "test": {
-    "mae": 5.300281280933852,
-    "rmse": 10.2997400406997,
-    "r2": 0.7953595078415034
+    "mae": 5.656696482666276,
+    "rmse": 10.79623682915076,
+    "r2": 0.7852698925182596
   },
   "test_baseline_median": {
-    "mae": 14.000494159928126,
-    "rmse": 23.21554145243267,
-    "r2": -0.03967279214960229
+    "mae": 14.497982708933716,
+    "rmse": 23.68091610778879,
+    "r2": -0.03310659620019463
   },
   "test_baseline_mean": {
-    "mae": 18.27222291468665,
-    "rmse": 23.66673336502304,
-    "r2": -0.08047738299074059
+    "mae": 18.824455755579674,
+    "rmse": 24.247184147886543,
+    "r2": -0.08310549068948991
   }
 }
 ```
 
 ## Interpretation
 
-Dropping all raw and derived lat/lon variables did not materially hurt model quality on the saved dataset. The no-location model achieved a test MAE of about 5.30 minutes and a test R² of about 0.795, which is slightly better than the previously reported location-enabled API run with test MAE about 5.50 minutes and test R² about 0.789.
+Dropping all raw and derived lat/lon variables did not materially hurt model quality on the saved dataset. The no-location model achieved a test MAE of about 5.65 minutes and a test R² of about 0.79, which is slightly better than the previously reported location-enabled API run.
 
 This suggests that the model's useful predictive signal is primarily coming from operational and temporal features such as confidence, stopped-signal ratio, low-speed ratio, max speed, stop sequence, and time-of-day features rather than actual geographic coordinates.
 
