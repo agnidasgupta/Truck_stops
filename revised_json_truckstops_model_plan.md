@@ -149,6 +149,19 @@ Each run should save:
 - feature importance CSV
 - test-set prediction CSV
 
+## Revised results:
+Held out test:
+    "mae": 5.501713931221768,
+    "rmse": 10.708553054204147,
+    "r2": 0.7887436746599101
+Target (duration_minutes) Stats:
+    Minimum: 5.00 minutes
+    Maximum: 336.12 minutes
+    Range:   331.12 minutes
+    Count:   2,910 
+    Mean:    27.62 minutes
+    Median:  17.42 minutes
+
 ## What this revised plan still does not solve
 The truck-stop actuals JSON is still only part of the full vegetation-cutting business problem. It does not directly include the main physical productivity drivers discussed earlier, such as:
 - encroachment quantity,
