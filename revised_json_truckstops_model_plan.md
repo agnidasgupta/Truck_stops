@@ -154,6 +154,11 @@ Each run should save:
 - "mae": 5.501713931221768
 - "rmse": 10.708553054204147
 - "r2": 0.7887436746599101
+- Baseline Median Model:
+- "mae": 14.497982708933716
+- "rmse": 23.68091610778879
+- "r2": -0.03310659620019463
+
 - Target (duration_minutes) Stats:
 - Minimum: 5.00 minutes
 - Maximum: 336.12 minutes
@@ -161,6 +166,14 @@ Each run should save:
 - Count:   2,910 
 - Mean:    27.62 minutes
 - Median:  17.42 minutes
+
+- Model Improvement from Baseline:
+- MAE reduction:  14.50 - 5.50 = 8.99 minutes
+- RMSE reduction: 23.68 - 10.71 = 12.97 minutes
+
+- Practical Interpretation:
+- Instead of being off by about 14.5 minutes on average using a naive estimate,
+the model is off by about 5.5 minutes on average.
 
 ## What this revised plan still does not solve
 The truck-stop actuals JSON is still only part of the full vegetation-cutting business problem. It does not directly include the main physical productivity drivers discussed earlier, such as:
