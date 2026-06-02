@@ -110,7 +110,9 @@ The revised plan is stricter about leakage because JSON payloads often include b
 ### Always exclude from training
 - `id`
 - `end_timestamp`
+- `lat/lon`
 - raw timestamp-derived identifiers
+- any location feature
 
 ### Exclude from deployable planning models
 - raw within-stop counts such as `point_count`, `low_speed_count`, `stopped_signal_count`
@@ -151,9 +153,9 @@ Each run should save:
 
 ## Revised results:
 - Held out test:
-- "mae": 5.501713931221768
-- "rmse": 10.708553054204147
-- "r2": 0.7887436746599101
+- "mae": 5.656696482666276
+- "rmse": 10.79623682915076
+- "r2": 0.7852698925182596
 - Baseline Median Model:
 - "mae": 14.497982708933716
 - "rmse": 23.68091610778879
@@ -168,12 +170,12 @@ Each run should save:
 - Median:  17.42 minutes
 
 - Model Improvement from Baseline:
-- MAE reduction:  14.50 - 5.50 = 8.99 minutes
-- RMSE reduction: 23.68 - 10.71 = 12.97 minutes
+- MAE reduction:  14.50 - 5.65 = 8.85 minutes
+- RMSE reduction: 23.68 - 10.79 = 12.89 minutes
 
 - Practical Interpretation:
 - Instead of being off by about 14.5 minutes on average using a naive estimate,
-the model is off by about 5.5 minutes on average.
+the model is off by about 5.6 minutes on average.
 
 ## What this revised plan still does not solve
 The truck-stop actuals JSON is still only part of the full vegetation-cutting business problem. It does not directly include the main physical productivity drivers discussed earlier, such as:
