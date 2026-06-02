@@ -63,7 +63,7 @@ If your local Python install cannot verify the site certificate chain, try these
 
 ### 1. Install certifi
 ```bash
-pip install certifi
+pip install certifi catboost
 ```
 
 ### 2. Use certifi's CA bundle explicitly
