@@ -37,25 +37,25 @@ Expected payload shape:
 
 ## Main scripts
 
-- `train_duration_from_truckstops_api_catboost.py`
-- `predict_duration_from_truckstops_api_catboost.py`
+- `train_duration_from_truckstops_api_catboost_v3_cafile.py`
+- `predict_duration_from_truckstops_api_catboost_v3_cafile.py`
 
 ## Training
 
 ### Train from the live API
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ### Train from a saved local JSON payload
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --input_path truckstops_payload.json \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ## SSL / certificate options
@@ -63,16 +63,16 @@ If your local Python install cannot verify the site certificate chain, try these
 
 ### 1. Install certifi
 ```bash
-pip install certifi catboost
+pip install certifi
 ```
 
 ### 2. Use certifi's CA bundle explicitly
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
   --cafile "$(python -c 'import certifi; print(certifi.where())')" \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ### 3. macOS python.org installs
@@ -83,41 +83,41 @@ open "/Applications/Python 3.13/Install Certificates.command"
 
 ### 4. Last resort for trusted internal testing only
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
   --insecure \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ## Prediction
 
 ### Predict from the live API using a saved model
 ```bash
-python predict_duration_from_truckstops_api_catboost.py \
-  --model_path truckstops_api_run/catboost_duration_model.cbm \
-  --metadata_path truckstops_api_run/model_metadata.json \
+python predict_duration_from_truckstops_api_catboost_v3_cafile.py \
+  --model_path truckstops_api_run_v3_cafile/catboost_duration_model_v3_cafile.cbm \
+  --metadata_path truckstops_api_run_v3_cafile/model_metadata.json \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
-  --output_dir truckstops_api_pred
+  --output_dir truckstops_api_pred_v3_cafile
 ```
 
 ### Predict from a saved local JSON payload
 ```bash
-python predict_duration_from_truckstops_api_catboost.py \
-  --model_path truckstops_api_run/catboost_duration_model.cbm \
-  --metadata_path truckstops_api_run/model_metadata.json \
+python predict_duration_from_truckstops_api_catboost_v3_cafile.py \
+  --model_path truckstops_api_run_v3_cafile/catboost_duration_model_v3_cafile.cbm \
+  --metadata_path truckstops_api_run_v3_cafile/model_metadata.json \
   --input_path truckstops_payload.json \
-  --output_dir truckstops_api_pred
+  --output_dir truckstops_api_pred_v3_cafile
 ```
 
 ### Predict from the live API with an explicit CA bundle
 ```bash
-python predict_duration_from_truckstops_api_catboost.py \
-  --model_path truckstops_api_run/catboost_duration_model.cbm \
-  --metadata_path truckstops_api_run/model_metadata.json \
+python predict_duration_from_truckstops_api_catboost_v3_cafile.py \
+  --model_path truckstops_api_run_v3_cafile/catboost_duration_model_v3_cafile.cbm \
+  --metadata_path truckstops_api_run_v3_cafile/model_metadata.json \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
   --cafile "$(python -c 'import certifi; print(certifi.where())')" \
-  --output_dir truckstops_api_pred
+  --output_dir truckstops_api_pred_v3_cafile
 ```
 
 Prediction evaluates metrics **only if** an explicit source target field is present (`duration_minutes` or `duration_time`).
@@ -146,38 +146,38 @@ For QA / upper-bound benchmarking only. Adds:
 
 ### Keep lunch / traffic stops
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --api_url https://centralserver.vegetationassurance.com/actuals/truckstops/ \
   --include_non_productive \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ### Change split ratios
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --input_path truckstops_payload.json \
   --train_frac 0.75 \
   --val_frac 0.10 \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ### Tune CatBoost parameters
 ```bash
-python train_duration_from_truckstops_api_catboost.py \
+python train_duration_from_truckstops_api_catboost_v3_cafile.py \
   --input_path truckstops_payload.json \
   --iterations 300 \
   --learning_rate 0.03 \
   --depth 6 \
   --mode operational \
-  --output_dir truckstops_api_run
+  --output_dir truckstops_api_run_v3_cafile
 ```
 
 ## Outputs
 
 Training writes:
-- `catboost_duration_model.cbm`
+- `catboost_duration_model_v3_cafile.cbm`
 - `model_metadata.json`
 - `metrics.json`
 - `raw_columns.json`
